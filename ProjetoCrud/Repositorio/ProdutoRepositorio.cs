@@ -56,6 +56,27 @@ namespace ProjetoCrud.Repositorio
             conn.Open();
             var cmd = new MySqlCommand("INSERT INTO Produtos (Nome, Preco) VALUES (@n, @p)", conn);
             cmd.Parameters.AddWithValue("@n", p.Nome);
+            cmd.Parameters.AddWithValue("@p", p.Preco);
+            cmd.ExecuteNonQuery();
+        }
+        public void Atualizar (Produto p)
+        {
+            using var conn = new MySqlConnection(_connectionString);
+            conn.Open();
+            var cmd = new MySqlCommand("UPDATE Produtos SET Nome=@n, Preco=@p WHERE Id=@id", conn);
+            cmd.Parameters.AddWithValue("@n", p.Nome);
+            cmd.Parameters.AddWithValue("@n", p.Preco);
+            cmd.Parameters.AddWithValue("@n", p.Id);
+            cmd.ExecuteNonQuery();
+        }
+
+        public void Excluir(int id)
+        {
+            using var conn = new MySqlConnection(_connectionString);
+            conn.Open();
+            var cmd = new MySqlCommand("DELETE FROM Produtos WHERE Id =@id", conn);
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.ExecuteNonQuery();
         }
     }
 }
