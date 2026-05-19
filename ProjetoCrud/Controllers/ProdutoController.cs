@@ -34,5 +34,44 @@ namespace ProjetoCrud.Controllers
             _produtoRepositorio.Adicionar(produto);
             return RedirectToAction(nameof(Index));
         }
+        [HttpGet]
+        public IActionResult Editar(int id)
+        {
+            var produto = _produtoRepositorio.ObterPorId(id);
+            if (produto == null) return NotFound();
+            var viewModel = new Produto
+            {
+                Id = produto.Id,
+                Nome=produto.Nome,
+                Preco=produto.Preco
+            };
+            return View(viewModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Editar(int id, Produto model)
+        {
+            if (id != model.Id) return BadRequest();
+            if (ModelState.IsValid)
+            {
+                var produto = new Produto
+                {
+                    Id = model.Id,
+                    Nome = model.Nome,
+                    Preco = model.Preco
+                };
+                _produtoRepositorio.Atualizar(produto);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(model);
+        }
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public IActionResult Excluir(int id)
+        {
+            _produtoRepositorio.Excluir(id);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
