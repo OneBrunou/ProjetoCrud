@@ -1,5 +1,45 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model ProjetoCrud.Models.Produto
 @{
+    ViewData["Title"] = "Novo Produto";
+}
+
+<div class=" container mt-4">
+    <div class="row justify-content-center">
+        <div class=col-md-6>
+            <div class=" card-shadow">
+                <div class=" card-header bg-primary text-white">
+                    <h4 class=" mb-0">Cadastrar novo produto</h4>
+                </div>
+                <div class=" card-body">
+                    <form asp-action="Criar" method="post">
+                        @Html.AntiForgeryToken()
+                        <div asp-validation-summary="ModelOnly" class=" text-danger mb-3"></div>
+
+                        <div class=" form-floating mb-3">
+                            <input asp-for="Nome" class=" form-control" placeholder="Nome do Produto0" />
+                            <label asp-for="Nome"></label>
+                            <span asp-validation-for="Nome" class="text-danger"></span>
+                        </div>
+
+                        <div class=" form-floating mb4">
+                            <input asp-for="Preco" type="number" step="0.01" class="form-control" placeholder="0.00" />
+                            <label asp-for="Nome"></label>
+                            <span asp-validation-for="Preco" class="text-danger"></span>
+                        </div>
+
+                        <div class=" d-grid gap-2">
+                            <butonn typeof=" submit" class=" btn btn-primary btn-lg">Salvar Produto</butonn>
+                            <a asp-action="Index" class="btn btn-link text-secondary">Cancelar e Voltar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Script{
+@{
+        await Html.RenderPartialAsync("_ValidationScriptPartial");
+    }
 }
