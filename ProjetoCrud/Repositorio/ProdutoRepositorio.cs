@@ -35,7 +35,7 @@ namespace ProjetoCrud.Repositorio
         {
             using var conn = new MySqlConnection(_connectionString);
             conn.Open();
-            var cmd = new MySqlCommand("SELECT * FROM Proddutos WHERE Id = @id", conn);
+            var cmd = new MySqlCommand("SELECT * FROM Produtos WHERE Id = @id", conn);
             cmd.Parameters.AddWithValue("@Id", id);
 
             using var reader = cmd.ExecuteReader();
