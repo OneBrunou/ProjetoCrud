@@ -45,8 +45,21 @@ namespace ProjetoCrud.Controllers
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Logar");
         }
-        
-        
+
+        [HttpGet]
+        public IActionResult CriarConta() => View();
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CriarConta(LoginViewModel usuario)
+        {
+            if (ModelState.IsValid)
+            {
+                _usuarioRepositorio.CriarConta(usuario);
+                return RedirectToAction("Logar");
+            }
+
+            return View(usuario);
+        }
             
         
     }
