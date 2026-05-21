@@ -1,5 +1,45 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model ProjetoCrud.Models.LoginViewModel
+
+<div>
+    <div>
+        <div>
+            <h3>Criar Conta</h3>
+            <div>
+                <form asp-action="CriarConta" method="post">
+                    @Html.AntiForgeryToken()
+                    <div>
+                        <div class=" card border-4 text-danger small mb-4">
+                            <label asp-for="Nome">Nome</label>
+                            <input asp-for="Nome" type="text" placeholder="" required />
+                            <span asp-validation-for="Nome"></span>
+                        </div>
+                        <div>
+                            <label asp-for="Email">Email</label>
+                            <input asp-for="Email" type="email" placeholder="aaa@gmail.com" requered />
+                            <span asp-validation-for="Email"></span>
+                        </div>
+                        <div>
+                            <label asp-for="Senha">Senha</label>
+                            <input asp-for="Senha" type="password" placeholder="Crie uma senha" requered />
+                            <span asp-validation-for="Senha"></span>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn-outline-success">Cadastrar</button>
+                        </div>
+                        <div>
+                            <p>Já possui conta?</p>
+                            <a asp-action="Logar">Fazer Login</a>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+   @section Scripts {
 @{
-}
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+   }
